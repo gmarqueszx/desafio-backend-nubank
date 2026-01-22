@@ -6,4 +6,5 @@ import space.gmarqueszx.desafio_api_nubank.model.entity.ClienteEntity;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<ClienteEntity, Long> {
+    boolean existsByCpf(String cpf);
 }

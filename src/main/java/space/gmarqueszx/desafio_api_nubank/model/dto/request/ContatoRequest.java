@@ -9,6 +9,8 @@ import lombok.Setter;
 public class ContatoRequest {
     @Email
     private String email;
+
     private String telefone;
+
     private Long clienteId;
 }
