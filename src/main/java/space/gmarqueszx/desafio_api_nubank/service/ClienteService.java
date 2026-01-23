@@ -55,10 +55,28 @@ public class ClienteService {
         return mapper.toDto(entity);
     }
 
+    @Transactional
     public List<ClienteResponse> listarTodos () {
-        return mapper.toCollectionDto(repository.findAll());
+        List<ClienteEntity> clientes = repository.findAll();
+
+        clientes.forEach(c -> {
+            System.out.println("Cliente: " + c.getNome());
+            System.out.println("Qtd Contatos na Entidade: " +
+                    (c.getContatos() != null ? c.getContatos().size() : "NULL"));
+        });
+
+        return mapper.toCollectionDto(clientes);
     }
 
+    @Transactional
+    public ClienteResponse exibirCliente(Long id) {
+        ClienteEntity entity =
+                repository.findById(id).orElseThrow(() -> new ClienteNaoEncontradoException(id));
+
+        return mapper.toDto(entity);
+    }
+
+    @Transactional
     public void deletar(Long id) {
         repository.deleteById(id);
     }
