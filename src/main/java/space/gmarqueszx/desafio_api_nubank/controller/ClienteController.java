@@ -2,6 +2,7 @@ package space.gmarqueszx.desafio_api_nubank.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import space.gmarqueszx.desafio_api_nubank.model.dto.request.ClienteRequest;
 import space.gmarqueszx.desafio_api_nubank.model.dto.response.ClienteResponse;
@@ -24,6 +25,7 @@ public class ClienteController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ClienteResponse criar(@RequestBody @Valid ClienteRequest request) {
         return service.criar(request);
     }
@@ -46,6 +48,7 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable Long id) {
         service.deletar(id);
     }
