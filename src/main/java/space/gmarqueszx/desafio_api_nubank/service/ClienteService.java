@@ -78,6 +78,8 @@ public class ClienteService {
 
     @Transactional
     public void deletar(Long id) {
-        repository.deleteById(id);
+        ClienteEntity entity =
+                repository.findById(id).orElseThrow(() -> new  ClienteNaoEncontradoException(id));
+        repository.deleteById(entity.getId());
     }
 }
